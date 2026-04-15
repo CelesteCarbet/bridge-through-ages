@@ -3,7 +3,7 @@
 # 桥通古今 —— 中国古代桥梁建筑成就交互可视化
 
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-web-blue)
+
 
 ## 📖 作品简介
 本作品为“中国大学生计算机设计大赛”参赛作品，聚焦1911年以前的中国古代桥梁，通过五大交互模块展现其时空分布、结构技艺、技术谱系、文化印记与数据统计。
