@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桥通古今——中国古代桥梁建筑成就交互可视化系统</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
+    #app { width: 100%; min-height: 100vh; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(0,0,0,0.3); flex-wrap: wrap; gap: 1rem; }
+    .logo { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+    .logo-icon { font-size: 1.5rem; }
+    .logo-text { font-size: 1.2rem; font-weight: 600; }
+    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .nav-btn { padding: 0.5rem 1rem; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.3s; font-size: 0.85rem; }
+    .nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .nav-btn.active { background: rgba(255,215,0,0.2); border-color: rgba(255,215,0,0.5); color: #FFD700; }
+    .main-content { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .section-title { color: #FFD700; font-size: 1.5rem; text-align: center; margin-bottom: 2rem; }
+    .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.2rem; }
+    .btn { padding: 0.6rem 1.2rem; background: rgba(255,215,0,0.2); border: 1px solid rgba(255,215,0,0.5); border-radius: 8px; color: #FFD700; cursor: pointer; transition: all 0.3s; }
+    .btn:hover { background: rgba(255,215,0,0.3); }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="logo" onclick="showPage('home')">
+        <span class="logo-icon">🌉</span>
+        <span class="logo-text">桥通古今</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" onclick="showPage('home')">首页</button>
+        <button class="nav-btn" onclick="showPage('geo')">时空地理图谱</button>
+        <button class="nav-btn" onclick="showPage('structure')">结构技艺解码</button>
+        <button class="nav-btn" onclick="showPage('tech')">营造技艺演化树</button>
+        <button class="nav-btn" onclick="showPage('cultural')">文化印记叙事流</button>
+        <button class="nav-btn" onclick="showPage('dashboard')">数据量化看板</button>
+      </nav>
+    </header>
+    
+    <main class="main-content">
+      <div id="page-home" class="page active">
+        <div style="text-align: center; padding: 3rem 0;">
+          <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(90deg, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">桥通古今</h1>
+          <h2 style="font-size: 1.2rem; margin-bottom: 1rem; color: rgba(255,255,255,0.9);">中国古代桥梁建筑成就交互可视化系统</h2>
+          <p style="color: rgba(255,255,255,0.7);">跨越千年时空，领略古代工程智慧</p>
+        </div>
+        
+        <div style="margin-bottom: 2rem;">
+          <h3 style="font-size: 1.3rem; text-align: center; margin-bottom: 1.5rem;">五大可视化模块</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+            <div class="card" onclick="showPage('geo')" style="cursor: pointer;">
+              <div style="font-size: 2rem; margin-bottom: 0.8rem;">🗺️</div>
+              <h4 style="color: #FFD700; margin-bottom: 0.3rem;">时空地理图谱</h4>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">以中国历史地图为底图，呈现古桥的时空分布</p>
+            </div>
+            <div class="card" onclick="showPage('structure')" style="cursor: pointer;">
+              <div style="font-size: 2rem; margin-bottom: 0.8rem;">🏗️</div>
+              <h4 style="color: #FFD700; margin-bottom: 0.3rem;">结构技艺解码</h4>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">三维结构拆解，展示典型桥梁的构造奥秘</p>
+            </div>
+            <div class="card" onclick="showPage('tech')" style="cursor: pointer;">
+              <div style="font-size: 2rem; margin-bottom: 0.8rem;">🌳</div>
+              <h4 style="color: #FFD700; margin-bottom: 0.3rem;">营造技艺演化树</h4>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">追溯六大核心技术体系的传承与演变</p>
+            </div>
+            <div class="card" onclick="showPage('cultural')" style="cursor: pointer;">
+              <div style="font-size: 2rem; margin-bottom: 0.8rem;">📜</div>
+              <h4 style="color: #FFD700; margin-bottom: 0.3rem;">文化印记叙事流</h4>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">构建"人—桥—事"三元知识图谱</p>
+            </div>
+            <div class="card" onclick="showPage('dashboard')" style="cursor: pointer;">
+              <div style="font-size: 2rem; margin-bottom: 0.8rem;">📊</div>
+              <h4 style="color: #FFD700; margin-bottom: 0.3rem;">数据量化看板</h4>
+              <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">多维度统计分析，呈现古桥遗产全貌</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 1.8rem; font-weight: 700; color: #FFD700;">36</div>
+            <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">代表性古桥</div>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 1.8rem; font-weight: 700; color: #FFD700;">6</div>
+            <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">大技术体系</div>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div style="font-size: 1.8rem; font-weight: 700; color: #FFD700;">5</div>
+            <div style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">维可视化</div>
+          </div>
+        </div>
+        
+        <div style="text-align: center; padding: 2rem; color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-top: 3rem;">
+          © 2026 桥通古今项目团队 | 审图号：GS(2024)0650号
+        </div>
+      </div>
+      
+      <div id="page-geo" class="page">
+        <h2 class="section-title">时空地理图谱</h2>
+        <div class="card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.5rem; color: #90EE90; font-weight: 600;">8座</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">华北地区</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.5rem; color: #90EE90; font-weight: 600;">12座</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">华东地区</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.5rem; color: #90EE90; font-weight: 600;">5座</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">华南地区</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.5rem; color: #90EE90; font-weight: 600;">4座</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">西南地区</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.5rem; color: #90EE90; font-weight: 600;">3座</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">华中地区</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.5rem; color: #90EE90; font-weight: 600;">4座</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">其他地区</div>
+            </div>
+          </div>
+          
+          <div style="margin-top: 1rem;">
+            <div style="color: #FFD700; margin-bottom: 0.5rem;">时间轴筛选</div>
+            <input type="range" min="-2000" max="1911" value="-2000" style="width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px;" oninput="updateYear(this.value)">
+            <div style="text-align: center; margin-top: 0.5rem; color: rgba(255,255,255,0.7);" id="year-display">当前时间：公元前2000年</div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="page-structure" class="page">
+        <h2 class="section-title">结构技艺解码</h2>
+        <div class="card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(255,215,0,0.08); border-left: 3px solid #FFD700; border-radius: 6px; padding: 1rem;" onclick="selectBridge('zhaozhou')">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem;">赵州桥</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">敞肩拱石拱桥</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 1rem;" onclick="selectBridge('luoyang')">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem;">洛阳桥</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">梁桥筏形基础</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 1rem;" onclick="selectBridge('luding')">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem;">泸定桥</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">铁索桥</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 6px; padding: 1rem;" onclick="selectBridge('bazi')">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem;">八字桥</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">城市水上立交</div>
+            </div>
+          </div>
+          
+          <div id="bridge-detail" style="margin-top: 1.5rem;">
+            <h3 style="color: #FFD700; margin-bottom: 1rem;">赵州桥 - 结构详解</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+              <div style="padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                <div style="color: #90EE90; font-weight: 500; margin-bottom: 0.3rem;">拱券层</div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">由28道独立拱券并列砌筑</div>
+              </div>
+              <div style="padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                <div style="color: #90EE90; font-weight: 500; margin-bottom: 0.3rem;">桥面系</div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">石板铺成，两侧设栏杆</div>
+              </div>
+              <div style="padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                <div style="color: #90EE90; font-weight: 500; margin-bottom: 0.3rem;">桥基</div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">采用睡木沉基法</div>
+              </div>
+              <div style="padding: 0.8rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+                <div style="color: #90EE90; font-weight: 500; margin-bottom: 0.3rem;">敞肩孔</div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">大拱两侧各设两个小拱</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="page-tech" class="page">
+        <h2 class="section-title">营造技艺演化树</h2>
+        <div class="card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div style="padding: 1rem; background: rgba(255,215,0,0.08); border-radius: 8px;">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #FFD700; margin-bottom: 0.5rem;">石拱券砌技术</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">首创年代：公元前200年</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">代表作：赵州桥</div>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">桥基处理技术</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">首创年代：公元前500年</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">代表作：洛阳桥</div>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">索桥锚固技术</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">首创年代：公元25年</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">代表作：泸定桥</div>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">木梁桥结构</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">首创年代：公元前1000年</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">代表作：灞桥</div>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">浮桥连舟技术</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">首创年代：公元前770年</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">代表作：蒲津桥</div>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+              <div style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">砖石雕饰工艺</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">首创年代：公元500年</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">代表作：卢沟桥</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="page-cultural" class="page">
+        <h2 class="section-title">文化印记叙事流</h2>
+        <div class="card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div>
+              <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 0.8rem;">🏛️ 桥梁</div>
+              <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="padding: 0.6rem; background: rgba(255,215,0,0.08); border-radius: 6px;">赵州桥</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">洛阳桥</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">泸定桥</div>
+              </div>
+            </div>
+            <div>
+              <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 0.8rem;">👤 人物</div>
+              <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">李春</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">蔡襄</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">僧怀丙</div>
+              </div>
+            </div>
+            <div>
+              <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 0.8rem;">📅 事件</div>
+              <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">赵州桥建造</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">洛阳桥建造</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">泸定桥建造</div>
+              </div>
+            </div>
+            <div>
+              <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 0.8rem;">📜 文学</div>
+              <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">赵州桥诗</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">枫桥夜泊</div>
+                <div style="padding: 0.6rem; background: rgba(255,255,255,0.03); border-radius: 6px;">卢沟晓月</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="page-dashboard" class="page">
+        <h2 class="section-title">数据量化看板</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="card" style="display: flex; align-items: center; gap: 1rem;">
+            <span style="font-size: 2rem;">🌉</span>
+            <div>
+              <div style="font-size: 1.6rem; font-weight: 700; color: #FFD700;">36</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">座古桥收录</div>
+            </div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 1rem;">
+            <span style="font-size: 2rem;">⏳</span>
+            <div>
+              <div style="font-size: 1.6rem; font-weight: 700; color: #FFD700;">1200</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">年平均历史</div>
+            </div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 1rem;">
+            <span style="font-size: 2rem;">✅</span>
+            <div>
+              <div style="font-size: 1.6rem; font-weight: 700; color: #FFD700;">22</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">座保存完整</div>
+            </div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 1rem;">
+            <span style="font-size: 2rem;">🏆</span>
+            <div>
+              <div style="font-size: 1.6rem; font-weight: 700; color: #FFD700;">12</div>
+              <div style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">处全国重点文保</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 style="color: #fff; margin-bottom: 1rem;">结构类型分布</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="color: rgba(255,255,255,0.7); width: 40px;">拱桥</span>
+              <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                <div style="height: 100%; width: 50%; background: #FFD700;"></div>
+              </div>
+              <span style="color: rgba(255,255,255,0.9); width: 30px; text-align: right;">18</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="color: rgba(255,255,255,0.7); width: 40px;">梁桥</span>
+              <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                <div style="height: 100%; width: 28%; background: #90EE90;"></div>
+              </div>
+              <span style="color: rgba(255,255,255,0.9); width: 30px; text-align: right;">10</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="color: rgba(255,255,255,0.7); width: 40px;">索桥</span>
+              <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                <div style="height: 100%; width: 8%; background: #87CEEB;"></div>
+              </div>
+              <span style="color: rgba(255,255,255,0.9); width: 30px; text-align: right;">3</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="color: rgba(255,255,255,0.7); width: 40px;">浮桥</span>
+              <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden;">
+                <div style="height: 100%; width: 6%; background: #DDA0DD;"></div>
+              </div>
+              <span style="color: rgba(255,255,255,0.9); width: 30px; text-align: right;">2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('page-' + pageId).classList.add('active');
+      document.querySelector(`.nav-btn[onclick="showPage('${pageId}')"]`).classList.add('active');
+    }
+    
+    function updateYear(value) {
+      const yearDisplay = document.getElementById('year-display');
+      if (value < 0) {
+        yearDisplay.textContent = '当前时间：公元前' + Math.abs(value) + '年';
+      } else {
+        yearDisplay.textContent = '当前时间：公元' + value + '年';
+      }
+    }
+    
+    function selectBridge(bridgeName) {
+      const bridges = ['zhaozhou', 'luoyang', 'luding', 'bazi'];
+      bridges.forEach(b => {
+        const el = document.querySelector(`[onclick="selectBridge('${b}')"]`);
+        el.style.background = b === bridgeName ? 'rgba(255,215,0,0.08)' : 'rgba(255,255,255,0.05)';
+        el.style.borderLeft = b === bridgeName ? '3px solid #FFD700' : 'none';
+      });
+      
+      const names = { zhaozhou: '赵州桥', luoyang: '洛阳桥', luding: '泸定桥', bazi: '八字桥' };
+      document.querySelector('#bridge-detail h3').textContent = names[bridgeName] + ' - 结构详解';
+    }
+  </script>
+</body>
+</html>
