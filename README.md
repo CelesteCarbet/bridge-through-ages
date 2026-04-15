@@ -16,7 +16,7 @@
 - **数据量化看板**：玫瑰图、柱状图等统计图表。
 
 ## 🚀 快速体验
-- **在线访问**：https://您的用户名.github.io/仓库名/
+- **在线访问**：https://CelesteCarbet.github.io/bridge-through-ages/
 - **本地运行**：直接下载 `index.html`，用现代浏览器打开即可。
 
 ## 🛠️ 技术栈
